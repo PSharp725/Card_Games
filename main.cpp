@@ -2,6 +2,8 @@
 #include <cmath>
 #include<vector>
 #include<string>
+#include <algorithm>
+#include <random>
 
 using namespace std;
 
@@ -74,13 +76,22 @@ vector<Card> full_52_card_deck()
     };    
 }
 
-
+/**
+ * function to shuffle a deck of cards in a random order
+ * @param card_deck 
+ * @return vector<Card> 
+ */
 vector<Card> shuffle_deck(vector<Card>& card_deck)
 {
-    int number_of_cards = card_deck.size();
+    srand(unsigned(time(NULL)));
+    random_shuffle(card_deck.begin(), card_deck.end());
+    return card_deck;
 }
 
 int main()
 {
+    vector<Card> playing_deck = full_52_card_deck();
+    playing_deck = shuffle_deck(playing_deck);
+    cout << "\n \n \n This code runs! \n \n \n" << endl;
     return 0;
 }
