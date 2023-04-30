@@ -5,7 +5,7 @@
 
 using namespace std;
 
-enum Rank {TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, QUEEN, KING, ACE};
+enum Rank {ACE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, QUEEN, KING};
 enum Suit {SPADES, HEARTS, DIAMONDS, CLUBS};
 
 struct Card
@@ -23,7 +23,7 @@ struct Deck
     int deck_size = 52;
 };
 
-    struct solitaire_playing_field
+struct solitaire_playing_field
     {
     Deck stock_deck;
     Deck waste_deck;
@@ -92,6 +92,18 @@ void shuffle_deck(Deck& deck)
     deck = shuffled;
 }
 
+/**
+ * pulls a card from the given deck, removes that card from the deck, then returns that card as the pulled card
+ * @param deck from which a crad should be pulled from
+ * @return Card that was pulled from the deck
+ */
+Card pull_card(Deck& deck)
+{
+    Card pull_card  = deck.cards[deck.cards.size() -1];
+    deck.cards.pop_back();
+    return pull_card;
+}
+
 /** 
  * A function that deals the cards for a game of solitaire. Creats the playing table
  */
@@ -101,104 +113,48 @@ void deal_cards_solitaire (solitaire_playing_field& field)
     initialize_deck(playing_deck);
     shuffle_deck(playing_deck);
 
-    int end_index = 51;
+    field.tabeleau_one_face_up.cards.push_back(pull_card(playing_deck));
+   
 
-    field.tabeleau_one_face_up.cards.push_back(playing_deck.cards[end_index]);
-    playing_deck.cards.pop_back();
-    end_index --;
+    field.tabeleau_two_face_down.cards.push_back(pull_card(playing_deck));
+    field.tabeleau_three_face_down.cards.push_back(pull_card(playing_deck));
+    field.tabeleau_four_face_down.cards.push_back(pull_card(playing_deck));
+    field.tabeleau_five_face_down.cards.push_back(pull_card(playing_deck));
+    field.tabeleau_six_face_down.cards.push_back(pull_card(playing_deck));
+    field.tabeleau_seven_face_down.cards.push_back(pull_card(playing_deck));
 
-    field.tabeleau_two_face_down.cards.push_back(playing_deck.cards[end_index]);
-    playing_deck.cards.pop_back();
-    end_index --;
-    field.tabeleau_three_face_down.cards.push_back(playing_deck.cards[end_index]);
-    playing_deck.cards.pop_back();
-    end_index --;
-    field.tabeleau_four_face_down.cards.push_back(playing_deck.cards[end_index]);
-    playing_deck.cards.pop_back();
-    end_index --;
-    field.tabeleau_five_face_down.cards.push_back(playing_deck.cards[end_index]);
-    playing_deck.cards.pop_back();
-    end_index --;
-    field.tabeleau_six_face_down.cards.push_back(playing_deck.cards[end_index]);
-    playing_deck.cards.pop_back();
-    end_index --;
-    field.tabeleau_seven_face_down.cards.push_back(playing_deck.cards[end_index]);
-    playing_deck.cards.pop_back();
-    end_index --;
+    field.tabeleau_two_face_up.cards.push_back(pull_card(playing_deck));
 
-    field.tabeleau_two_face_up.cards.push_back(playing_deck.cards[end_index]);
-    playing_deck.cards.pop_back();
-    end_index --;
+    field.tabeleau_three_face_down.cards.push_back(pull_card(playing_deck));
+    field.tabeleau_four_face_down.cards.push_back(pull_card(playing_deck));
+    field.tabeleau_five_face_down.cards.push_back(pull_card(playing_deck));
+    field.tabeleau_six_face_down.cards.push_back(pull_card(playing_deck));
+    field.tabeleau_seven_face_down.cards.push_back(pull_card(playing_deck));
 
-    field.tabeleau_three_face_down.cards.push_back(playing_deck.cards[end_index]);
-    playing_deck.cards.pop_back();
-    end_index --;
-    field.tabeleau_four_face_down.cards.push_back(playing_deck.cards[end_index]);
-    playing_deck.cards.pop_back();
-    end_index --;
-    field.tabeleau_five_face_down.cards.push_back(playing_deck.cards[end_index]);
-    playing_deck.cards.pop_back();
-    end_index --;
-    field.tabeleau_six_face_down.cards.push_back(playing_deck.cards[end_index]);
-    playing_deck.cards.pop_back();
-    end_index --;
-    field.tabeleau_seven_face_down.cards.push_back(playing_deck.cards[end_index]);
-    playing_deck.cards.pop_back();
-    end_index --;
 
-    field.tabeleau_three_face_up.cards.push_back(playing_deck.cards[end_index]);
-    playing_deck.cards.pop_back();
-    end_index --;
+    field.tabeleau_three_face_up.cards.push_back(pull_card(playing_deck));
 
-    field.tabeleau_four_face_down.cards.push_back(playing_deck.cards[end_index]);
-    playing_deck.cards.pop_back();
-    end_index --;
-    field.tabeleau_five_face_down.cards.push_back(playing_deck.cards[end_index]);
-    playing_deck.cards.pop_back();
-    end_index --;
-    field.tabeleau_six_face_down.cards.push_back(playing_deck.cards[end_index]);
-    playing_deck.cards.pop_back();
-    end_index --;
-    field.tabeleau_seven_face_down.cards.push_back(playing_deck.cards[end_index]);
-    playing_deck.cards.pop_back();
-    end_index --;
+    field.tabeleau_four_face_down.cards.push_back(pull_card(playing_deck));
+    field.tabeleau_five_face_down.cards.push_back(pull_card(playing_deck));
+    field.tabeleau_six_face_down.cards.push_back(pull_card(playing_deck));
+    field.tabeleau_seven_face_down.cards.push_back(pull_card(playing_deck));
 
-    field.tabeleau_four_face_up.cards.push_back(playing_deck.cards[end_index]);
-    playing_deck.cards.pop_back();
-    end_index --;
+    field.tabeleau_four_face_up.cards.push_back(pull_card(playing_deck));
 
-    field.tabeleau_five_face_down.cards.push_back(playing_deck.cards[end_index]);
-    playing_deck.cards.pop_back();
-    end_index --;
-    field.tabeleau_six_face_down.cards.push_back(playing_deck.cards[end_index]);
-    playing_deck.cards.pop_back();
-    end_index --;
-    field.tabeleau_seven_face_down.cards.push_back(playing_deck.cards[end_index]);
-    playing_deck.cards.pop_back();
-    end_index --;
+    field.tabeleau_five_face_down.cards.push_back(pull_card(playing_deck));
+    field.tabeleau_six_face_down.cards.push_back(pull_card(playing_deck));
+    field.tabeleau_seven_face_down.cards.push_back(pull_card(playing_deck));
 
-    field.tabeleau_five_face_up.cards.push_back(playing_deck.cards[end_index]);
-    playing_deck.cards.pop_back();
-    end_index --;
+    field.tabeleau_five_face_up.cards.push_back(pull_card(playing_deck));
 
-    field.tabeleau_six_face_down.cards.push_back(playing_deck.cards[end_index]);
-    playing_deck.cards.pop_back();
-    end_index --;
-    field.tabeleau_seven_face_down.cards.push_back(playing_deck.cards[end_index]);
-    playing_deck.cards.pop_back();
-    end_index --;
+    field.tabeleau_six_face_down.cards.push_back(pull_card(playing_deck));
+    field.tabeleau_seven_face_down.cards.push_back(pull_card(playing_deck));
 
-    field.tabeleau_six_face_up.cards.push_back(playing_deck.cards[end_index]);
-    playing_deck.cards.pop_back();
-    end_index --;
+    field.tabeleau_six_face_up.cards.push_back(pull_card(playing_deck));
 
-    field.tabeleau_seven_face_down.cards.push_back(playing_deck.cards[end_index]);
-    playing_deck.cards.pop_back();
-    end_index --;
+    field.tabeleau_seven_face_down.cards.push_back(pull_card(playing_deck));
 
-    field.tabeleau_seven_face_up.cards.push_back(playing_deck.cards[end_index]);
-    playing_deck.cards.pop_back();
-    end_index --;
+    field.tabeleau_seven_face_up.cards.push_back(pull_card(playing_deck));
 
     field.stock_deck = playing_deck;
 }
