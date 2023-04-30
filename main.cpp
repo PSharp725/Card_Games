@@ -23,7 +23,6 @@ struct Deck
     int deck_size = 52;
 };
 
-// Establishing the stock deck, waste deck, tabeleau, and foundation as the struct of the playing table for solitaire
     struct solitaire_playing_field
     {
     Deck stock_deck;
