@@ -8,23 +8,20 @@ using namespace std;
 enum Rank {ACE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, QUEEN, KING};
 enum Suit {SPADES, CLUBS, HEARTS, DIAMONDS};
 
-struct Card
-{
+struct Card{
     Rank rank;
     Suit suit;
     int num_of_ranks = 13;
     int num_of_suits = 4;
 };
 
-struct Deck
-{
+struct Deck{
     vector<Card> cards;
     string card_back;
     int deck_size = 52;
 };
 
-struct solitaire_playing_field
-    {
+struct solitaire_playing_field{
     Deck stock_deck;
     Deck waste_deck;
     Deck tabeleau_one_face_up;
@@ -44,13 +41,12 @@ struct solitaire_playing_field
     Deck foundation_two;
     Deck foundation_three;
     Deck foundation_four;
-    };
+};
 
 /**
  * function to creats a full deck of cards for play
  */
-void initialize_deck(Deck& deck) 
-{
+void initialize_deck(Deck& deck) {
         Card card;
         for (int suit = 0; suit < card.num_of_suits; suit++)
         {
@@ -63,13 +59,11 @@ void initialize_deck(Deck& deck)
         }
 }
 
-void print_card(const Card& card)
-{
+void print_card(const Card& card){
     cout << card.rank << " " << card.suit << endl;
 }
 
-void print_deck(const Deck& deck)
-{
+void print_deck(const Deck& deck){
     for (Card c: deck.cards)
     {
         print_card(c);
@@ -79,8 +73,7 @@ void print_deck(const Deck& deck)
 /**
  * function to shuffle a deck of cards in a random order  
  */
-void shuffle_deck(Deck& deck)
-{
+void shuffle_deck(Deck& deck){
     Deck shuffled;
     srand(unsigned(time(NULL)));
     while (!deck.cards.empty())
@@ -97,18 +90,16 @@ void shuffle_deck(Deck& deck)
  * @param deck from which a crad should be pulled from
  * @return Card that was pulled from the deck
  */
-Card pull_card(Deck& deck)
-{
+Card pull_card(Deck& deck){
     Card pull_card  = deck.cards[deck.cards.size() -1];
     deck.cards.pop_back();
     return pull_card;
 }
 
 /** 
- * A function that deals the cards for a game of solitaire. Creats the playing table
+ * A function that deals the cards for a game of solitaire. Creates the playing table
  */
-void deal_cards_solitaire (solitaire_playing_field& field)
-{
+void deal_cards_solitaire (solitaire_playing_field& field){
     Deck playing_deck;
     initialize_deck(playing_deck);
     shuffle_deck(playing_deck);
@@ -159,16 +150,44 @@ void deal_cards_solitaire (solitaire_playing_field& field)
     field.stock_deck = playing_deck;
 }
 
-int solitaire_sim()
-{
+/**
+ * Looks if the cards are the same color else it returns true
+ * @param card_one 
+ * @param card_two 
+ * @return true or false depending on if the cards are differnt colors (i.e clubs and spades are black and hearts and diamonds are red) 
+ */
+bool differnt_color_suits (Card card_one, Card card_two){
+    // Only checking if they're the same color for a flase return, else return true.
+    if (card_one.suit == 0 && card_two.suit == 1 ){
+        return false;
+    }
+    else if (card_one.suit == 1 && card_two.suit == 0 ){
+        return false;
+    }
+    else if (card_one.suit == 2 && card_two.suit == 3 ){
+        return false;
+    }
+    else if (card_one.suit == 3 && card_two.suit == 2 ){
+        return false;
+    }
+    else{
+        return true;
+    }
+}
+
+
+/**
+ * 
+ * @return the final score of the game
+ */
+int solitaire_sim(){
     int score = 0;
     solitaire_playing_field playing_field;
     deal_cards_solitaire (playing_field);
     return score;
 }
 
-int main()
-{
+int main(){
     cout << "\n \n \n This code runs! \n \n \n" << endl;
     return 0;
 }
