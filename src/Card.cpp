@@ -2,17 +2,10 @@
 #include <iostream>
 
 
-Card::Card(){
-    cardFace = "";
-}
-
 Card::Card(Rank rank, Suit suit, std::string face){
     cardRank = rank;
     cardSuit = suit;
     cardFace = face;
-}
-
-Card::~Card(){ 
 }
 
 Suit Card::getCardSuit(){

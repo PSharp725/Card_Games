@@ -11,13 +11,8 @@ class Card {
 
 public:
 
-    // Constructor
-    Card();
-
     // Constructor that intializes the cards suit, rank, and face (image)
     Card(Rank rank, Suit suit, std::string face);
-
-    ~Card();
 
     // Returns a card's suit
     Suit getCardSuit();
@@ -31,14 +26,13 @@ public:
     // returns a cards face
     std::string getCardFace();
 
-    // The cards rank/suit
-    Rank cardRank;
-    Suit cardSuit;
-
 private:
 
     // Cards face image address
     std::string cardFace;
+    // The cards rank/suit
+    Rank cardRank;
+    Suit cardSuit;
 
 };
 
