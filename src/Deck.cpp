@@ -8,8 +8,6 @@ Deck::Deck(){
     card_back = "Back.png";
 }
 
-Deck::~Deck(){  
-}
 
 
 void Deck::initializeDeck(){

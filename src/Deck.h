@@ -15,8 +15,6 @@ public:
 
     Deck();
 
-    ~Deck();
-
     /**
     * function to creats a full deck of cards for play
     */
